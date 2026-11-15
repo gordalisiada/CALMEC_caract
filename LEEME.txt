@@ -1,0 +1,7 @@
+Caracterización Carreño
+
+CALMEC_CHARAC_V7_2
+linea 222: No entiendo para que le suma y le resta el desfase
+linea 223: qué es RPC ?
+linea 228: por algún motivo hace esto. Creo que es por si la señal tiene valores negativos. También la parte del ones(size(Instr.npc)) no la tengo clara, porq eso da 1
+

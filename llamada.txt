@@ -1,0 +1,2 @@
+[presionr] = cadPresOrder(NPC,CGradosCiclo,intang,presionr);
+[CC] = cadCCOrder(CGradosCiclo,intang,CC);
