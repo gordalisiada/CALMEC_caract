@@ -15,7 +15,7 @@ name = 'CALMEC_CHARAC V7_2'
 % Introduce the name of the xlsx and instantaneous folder where the
 % configuration and the pressure signals are
 % Engine_Name = 'DW12_V4';
-Engine_Name = 'DW12_P_v1_ALL';
+Engine_Name = 'Powerful_2015';
 % Introduce the name to the saved data, if you don't change the name the
 % previous file will be replaced
 Identifier = 'TEST_2026'; %'CHAR06';
@@ -97,9 +97,9 @@ for Current_Cyl = 1 : 4
     Kpref = zeros(1,num_tests); % Correction factor for the reference pressure
     VES = [Vrc Vkdef Vcw1 Valpha];
     
-    % Nº of revolutions per cycle
+    % NÂº of revolutions per cycle
     CRevCiclo = Engine.NOS / 2;
-    % Nº of revolutions per cycle
+    % NÂº of revolutions per cycle
     CGradosCiclo = CRevCiclo * 360;
     % Angular increment
     intang = (CGradosCiclo/Instr.npc);
@@ -265,7 +265,7 @@ for Current_Cyl = 1 : 4
                     pre_derivative = intang.*(pi/180).*pre_derivative; % pasa datos a pre_der
                 elseif strcmp(Type,'.txt')
                     % Open txt files
-                    pfiles = [cell2mat(test_name(ens)) '.txt']; %acá faltaba el (ens)
+                    pfiles = [cell2mat(test_name(ens)) '.txt']; %acÃ¡ faltaba el (ens)
                     presionr = importdata([inst_signals_path char(cylinder.cil) '\' pfiles]);
                     presionr = presionr.data;
                     presionr(:,1) = presionr(:,1)+(initial_phase-Adjustment.desfasetot);
@@ -286,7 +286,7 @@ for Current_Cyl = 1 : 4
                 % PRESSURE SIGNALS ARE AVERAGED AND FILTERED % modificado prueba
                 %            num_test=1;
                 %            P_fil=filtering(presionr(:,1),Instr,v.n(ens));%p_nc_fil is filtered, p is filtered and averaged
-                % Set the phase in the right quadrant, the phase will change (add 360º)
+                % Set the phase in the right quadrant, the phase will change (add 360Âº)
                 %            phase = Set_Phase(Adjustment);
                 %            Adjustment.desfasetot = phase;
 
@@ -653,7 +653,7 @@ for Current_Cyl = 1 : 4
                     % Simulated cycle calculation "SICICLO"masacil
                     Qn_bb_siciclo =((r)*temp_ant*MBB); % From dFQL equation (energy balance, be careful)
                     Temp = Temp_ant+(-(Presion_ant*(vol_delta))-QW-Qn_bb_siciclo)/(masacil*cv);
-                    Presion = masacil * r * Temp/vol; % The mass is not anymore constant between points (¿?)
+                    Presion = masacil * r * Temp/vol; % The mass is not anymore constant between points (Â¿?)
                     Temp_ant = Temp;% Update variables
                     Presion_ant = Presion;% Update variables
                     % Heat release variation
@@ -725,7 +725,7 @@ for Current_Cyl = 1 : 4
                         'RoHR','Qw','ebb','HR','expol','Gamma','Qn total','Qn BB','Qn',...
                         'dV','dP','dT','P simulada','h','cv','mbb acumulated','Psim-Preal',...
                         'Injection Rate','Gas constant'};
-                    Units = {'º','Pa','m^3','-','-','-','J/kg*K','K','kg',...
+                    Units = {'Âº','Pa','m^3','-','-','-','J/kg*K','K','kg',...
                         'kg','kg','J','J','J','J/CAD','J/CAD','J','J'...
                         '-','-','J/CAD','J/CAD','J/CAD','m^3/CAD','Pa/CAD','K/CAD','Pa',...
                         'W/m^2K','J/kgK','Kg','bar','g/s','Pa*m^3/kg*K'};
@@ -743,7 +743,7 @@ for Current_Cyl = 1 : 4
                         'RoHR','Qw','ebb','HR','expol','Gamma','Qn total','Qn BB','Qn',...
                         'dV','dP','dT','P simulada','h','cv','mbb acumulated','Psim-Preal',...
                         'Injection Rate','Gas constant'};
-                    Units = {'º','Pa','m^3','-','-','-','J/kg*K','K','kg/s',...
+                    Units = {'Âº','Pa','m^3','-','-','-','J/kg*K','K','kg/s',...
                         'kg','kg','J','J','J','J/CAD','J/CAD','J','J'...
                         '-','-','J/CAD','J/CAD','J/CAD','m^3/CAD','Pa/CAD','K/CAD','Pa',...
                         'W/m^2K','J/kgK','Kg','bar','g/s','Pa*m^3/kg*K'};
@@ -867,23 +867,23 @@ for Current_Cyl = 1 : 4
     
     % Modificaciones
     
-    % 1. Si se cambia el desfase para archivos en los que se usa la señal
+    % 1. Si se cambia el desfase para archivos en los que se usa la seÃ±al
     % directamente con referencia angular en el estudio del metodo de ajuste,
     % se debe activar la linea que incluye el desfase en el eje angular de la
-    % señal de presión
+    % seÃ±al de presiÃ³n
     
     % 2. vol_der es la forma simplificada Vol antes - Vol despues para que
-    % coincida con a forma de calcular con Siciclo, por eso la pequeña
+    % coincida con a forma de calcular con Siciclo, por eso la pequeÃ±a
     % diferencia en la dFQL calculada con CALMEC_CHARAC_V3_3
     
-    % 3. Se ha incluido una función para el ajuste de los factores globales
+    % 3. Se ha incluido una funciÃ³n para el ajuste de los factores globales
     % RCO, CW1, CDM, desfase y 2 funciones para ajustar Pref: la primera solo
     % emplea el criterio de minimizar error en la dFQL (para dar un valor de
-    % entrada) y otra con el efecto de dFQL y Psim para afinar. El método se
-    % basa en minimizar el error cuadrático.
+    % entrada) y otra con el efecto de dFQL y Psim para afinar. El mÃ©todo se
+    % basa en minimizar el error cuadrÃ¡tico.
     
-    % 4. Importante corregir la variación del desfase para binarios, ahora
-    % mismo calcularía un error
+    % 4. Importante corregir la variaciÃ³n del desfase para binarios, ahora
+    % mismo calcularÃ­a un error
     
     % 5. Solo esta probado para archivos con extension .DAT
     % end
@@ -894,11 +894,11 @@ for Current_Cyl = 1 : 4
     clc
     if strcmp(PolyEx,'yes')
         % Notes
-        Note = 'Los modelos de combustion (evaporación) no estan completos'
+        Note = 'Los modelos de combustion (evaporaciÃ³n) no estan completos'
         End  = ['Final Iteration ' num2str(Iteration) ' | ' cylinder.cil]
     else
         % Notes
-        Note = 'Los modelos de combustion (evaporación) no estan completos'
+        Note = 'Los modelos de combustion (evaporaciÃ³n) no estan completos'
         End  = ['Final Iteration ' num2str(Iteration)]
     end
     
